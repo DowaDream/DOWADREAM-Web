@@ -21,8 +21,8 @@ const InfoItem = (props) => {
                   <InfoTextTag>{num}</InfoTextTag>
                   <InfoTextTitle>{title}</InfoTextTitle>
                   <InfoTextDetail>등록기관: {institute}</InfoTextDetail>
-                  <InfoTextDetail>모집기간: {actStart}-{actEnd}</InfoTextDetail>
-                  <InfoTextDetail>봉사기간 : {actStart}-{actEnd}</InfoTextDetail>
+                  <InfoTextDetail>모집기간: {recruitStart}-{recruitEnd}</InfoTextDetail>
+                  <InfoTextDetail>봉사시간 : {actStart}-{actEnd}</InfoTextDetail>
                 </InfoTextDiv>
 
     </Infodiv>
