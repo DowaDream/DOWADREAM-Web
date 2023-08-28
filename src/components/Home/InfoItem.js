@@ -7,22 +7,24 @@ import { TagNameMaker } from '../../assets/TagCode';
 // '구'를 파라미터로 넘겨서 검색
 
 const InfoItem = (props) => {
-  const {width=25, height=90, onClick=null,tag,institute,place,actStart,progrmRegistNo,title,actEnd,recruitStart,recruitEnd,dday,writer,writer_profile_img,writer_username} = props;
+  const {width=25, height=90, onClick=null,tag,institute,place,actStart="",progrmRegistNo,title,actEnd="",recruitStart,recruitEnd,dday=0,writer,writer_profile_img,writer_username} = props;
   const num = TagNameMaker(tag);
   const url = getImageName(num);
-
+  console.log(actEnd)
   return (
     <Infodiv width={width} height={height} onClick={onClick}>
                 <InfoImg style={                
-{                  backgroundImage: `url(${process.env.PUBLIC_URL}/tagImage/${url})`}                  }>
-                    <Ddaydiv><div>D-{dday}</div></Ddaydiv>
+{                  backgroundImage: `url(${process.env.PUBLIC_URL}/tagImage/${url})`}}>
+                    <Ddaydiv>
+                      D-<span style={{ color: 'red' }}>{Math.abs(dday)}</span>  
+                    </Ddaydiv>
                 </InfoImg>
                 <InfoTextDiv>
                   <InfoTextTag>{num}</InfoTextTag>
                   <InfoTextTitle>{title}</InfoTextTitle>
                   <InfoTextDetail>등록기관: {institute}</InfoTextDetail>
                   <InfoTextDetail>모집기간: {recruitStart}-{recruitEnd}</InfoTextDetail>
-                  <InfoTextDetail>봉사시간 : {actStart}-{actEnd}</InfoTextDetail>
+                  <InfoTextDetail>봉사시간 : {actStart.slice(11,16)} - {actEnd.slice(11,16)}</InfoTextDetail>
                 </InfoTextDiv>
 
     </Infodiv>
@@ -57,6 +59,10 @@ const Ddaydiv = styled.div`
     align-items: center;
     background: var(--yellow-color, #FFE34F);
     z-index: 10;
+
+    color: #000;
+    font-weight: 700;
+
 `
 
 

@@ -129,7 +129,7 @@ const MainInfo = () => {
         console.log(result1)
 
         const volInfo = await SearchAreaKeyword(null,result1);
-
+        
         setInfoList(volInfo);
         setInfoCount(volInfo.length);
         setTotalNum(1);

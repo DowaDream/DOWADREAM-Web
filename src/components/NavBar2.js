@@ -21,43 +21,51 @@ function NavBar2() {
   const navigate = useNavigate();
   const [userInfo, setUserInfo] = useState(null);
   const [isLogined, setIsLogined] = useState(false);
-  const [userName, setUserName] = useState('');
-  const [profile, setProfile] = useState('');
-  const [userEmail, setUserEmail] = useState('');
+  const [userName, setUserName] = useState(window.sessionStorage.getItem('name'));
+  const [profile, setProfile] = useState(window.sessionStorage.getItem('profile'));
+  const [userEmail, setUserEmail] = useState(window.sessionStorage.getItem('email'));
+
+  useEffect(()=>{
+    // window.localStorage.removeItem("accessToken");
+    const Token = window.localStorage.getItem("accessToken");
+    console.log(Token);
+    if(Token!==null){
+      setIsLogined(true);
+    }
+  },[]) 
 
   
 
   const LoginSuccess = async (credentialResponse) => {
     setIsLogined(true);
     console.log(credentialResponse);
-    const token = credentialResponse.credential;
     const token2 = jwtDecode(credentialResponse.credential);
 
-    console.log(token);
+    window.sessionStorage.setItem('profile', token2.picture);
+    window.sessionStorage.setItem('name', token2.name);
+    window.sessionStorage.setItem('email', token2.email);
+
+
     setUserInfo(token2);
     setUserName(token2.name);
     setProfile(token2.picture);
     setUserEmail(token2.email);
     
-    console.log(userEmail);
-    console.log(profile);
-    console.log(userName);
 
-    doSignUp();
-    await sendUserData(userEmail, profile, userEmail);
+    await sendUserData(token2.name, token2.email, token2.name);
     const List =  await getUserInfo();
   };
   
   
-
-  const doSignUp = () => {
-    window.sessionStorage.setItem('profile', profile);
-    window.sessionStorage.setItem('name', userName);
-  }
-  const sendUserData = async (userName, profile, userEmail) =>{
+  const sendUserData = async (userName, userEmail, profile) =>{
     const name1 = String(userName);
     const profile1 = String(profile);
     const email1 = String(userEmail);
+
+    console.log(name1)
+    console.log(profile1)
+    console.log(email1)
+
     const baseUrl = "https://api.dowadream.site/user/";
     try {    
         const response = await axios.post(`${baseUrl}get-token/`, { // URL 수정
@@ -91,18 +99,6 @@ function NavBar2() {
     window.sessionStorage.clear();
     window.localStorage.clear();
   }
-/*
-  useEffect(() => {
-    const name = window.sessionStorage.getItem('name');
-    if(name) {
-      LoginSuccess();
-    }
-    else {
-      onLogout();
-    }
-  }, []);
-  */
-
     
     
 

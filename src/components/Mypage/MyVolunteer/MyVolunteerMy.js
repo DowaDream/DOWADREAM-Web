@@ -96,12 +96,12 @@ function MyVolunteerMy(){
 
 
 const Iteminfo = styled.div`
-
-justify-content : flex-start;
+  display : flex;
   width: 100%;
-  flex : 1;
-  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 2em;
+  gap: 32px;
 
 `

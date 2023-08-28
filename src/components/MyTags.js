@@ -209,9 +209,9 @@ function MyTags(){
                 setAllInfo={setAllInfo} // 수정된 부분: setdetailButtonStates가 아니라 setDetailButtonStates
               ></InfoSelectionList>
               <LocDeletediv>
-                <LocDeleteText>지역</LocDeleteText>
+                {/* <LocDeleteText>지역</LocDeleteText> */}
                 <LocDeleteAll>
-                  {deleteDiv}
+                  {/* {deleteDiv} */}
                 </LocDeleteAll>
               </LocDeletediv>
           </LocWrapper>

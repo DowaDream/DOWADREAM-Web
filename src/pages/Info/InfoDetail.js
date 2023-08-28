@@ -6,7 +6,6 @@ import { Link, useParams } from "react-router-dom";
 
 import illust from '../../../src/assets/일러스트.jpg'
 import ReviewItem from '../../components/Review/ReviewItem';
-import InfoItem2 from '../../components/Maininfo/InfoItem2';
 
 import LikesandScrap from '../../components/Maininfo/LikesandScrap'
 import { getVolDetail, getVolReview } from '../../apis/VolInfo/VolInfo';
@@ -14,6 +13,7 @@ import { TagNameMaker } from '../../assets/TagCode';
 import { getImageName } from '../../assets/태그사진/tagImage';
 import { SearchAreaKeyword } from '../../apis/Review/ScrapCheerSave';
 import InfoItem from '../../components/Home/InfoItem';
+import { getAllReviewInfo } from '../../apis/Review/GetReview';
 
 function InfoDetail (){
 
@@ -33,14 +33,98 @@ function InfoDetail (){
         recruitInstitute: "",
       });
 
+
       const [reviewList, setReviewList] = useState([]);
       const [volList,setVoList] = useState();
 
       const fetchReview = async () => {
           console.log(infoId.infoId)
-          const fetchedReview = await getVolReview(infoId.infoId);
-          console.log(fetchedReview);
+          // const fetchedReview = await getVolReview(infoId.infoId);
+          // console.log(fetchedReview);
+          const ReviewInfo = await getAllReviewInfo();
+          const filteredData = ReviewInfo.filter(item => item.progrmRegistNo === info.progrmRegistNo);
+          console.log(filteredData);
+          if(filteredData.length===0){
+            const Link= makeNon(ReviewInfo);
+            setReviewList(Link);
+          }else{
+            const Link = makeReview(filteredData);
+            setReviewList(Link);
+          }
+          
+          
       }
+
+      const makeNon = (ReviewInfo) => {
+        if(ReviewInfo.length>4){
+          const mainReviews = [];
+          const List = ReviewInfo.slice(0,4);
+          List.map((item,index)=>{
+            mainReviews.push(
+                <ReviewItem
+                    width={'475px'}
+                    key={index}
+                    
+                    rid={item.rid}
+                    updated_at={item.updated_at}
+                    progrmRegistNo={item.progrmRegistNo}
+                    title={item.title}
+                    tag= {item.tag}
+
+                    num_comment ={item.num_comment}
+                    num_cheer={item.num_cheer}
+                    content={item.content}
+                    is_public={item.is_public}
+                    is_customized={item.is_customized}
+
+                    writer={item.writer}
+                    writer_profile_img={item.writer_profile_img}
+                    images={item.images}
+                />
+
+            )
+        })
+        return mainReviews;
+
+        }
+
+        
+      }
+
+      const makeReview = (ReviewInfo) =>{
+        const mainReviews = [];
+        if(ReviewInfo.length !== 0){
+
+          reviewList.map((item,index)=>{
+            mainReviews.push(
+                <ReviewItem
+                    width={'25%'}
+                    key={index}
+                    
+                    rid={item.rid}
+                    updated_at={item.updated_at}
+                    progrmRegistNo={item.progrmRegistNo}
+                    title={item.title}
+                    tag= {item.tag}
+
+                    num_comment ={item.num_comment}
+                    num_cheer={item.num_cheer}
+                    content={item.content}
+                    is_public={item.is_public}
+                    is_customized={item.is_customized}
+
+                    writer={item.writer}
+                    writer_profile_img={item.writer_profile_img}
+                    images={item.images}
+                />
+
+            )
+        })
+        return mainReviews;
+          
+        }
+      }
+
       async function fetchInfo() {
         var fetchedInfo = await getVolDetail(infoId.infoId);
         const tagcd = [fetchedInfo.tagCode];
@@ -123,11 +207,11 @@ function InfoDetail (){
         <ReviewContent>후기</ReviewContent>
         <ReviewInfodiv>
           <ReviewInfoWrapper>
-
+            {reviewList}
+            {/* <ReviewItem width={'475px'}></ReviewItem>
             <ReviewItem width={'475px'}></ReviewItem>
             <ReviewItem width={'475px'}></ReviewItem>
-            <ReviewItem width={'475px'}></ReviewItem>
-            <ReviewItem width={'475px'}></ReviewItem>
+            <ReviewItem width={'475px'}></ReviewItem> */}
 
           </ReviewInfoWrapper>
         </ReviewInfodiv>
@@ -153,7 +237,7 @@ function InfoDetail (){
                           recruitStart={item.recruitStart}
                           recruitEnd={item.recruitEnd}
                           actStart={item.actStart}
-                          actEnd={item.actSEnd}
+                          actEnd={item.actEnd}
                           dday ={item.dday}
                           place={item.place}
                           // num_cheer={item.num_cheer}
@@ -202,7 +286,7 @@ flex-direction: column;
 align-items: center;
 width: 100%;
 background-color:light-pink;
-height: 899px;
+min-height: 899px;
 `
 const LikesScrapContainer = styled.div`
 display: flex;
@@ -228,7 +312,8 @@ flex-direction: row;
 align-items: flex-start;
 padding: 20px;
 width: 100%;
-height: 439px;
+min-height: 439px;
+
 /* Dark Gray Color */
 border-width: 1px 0px;
 border-style: solid;

@@ -1,10 +1,8 @@
 import axios from "axios";
-import { getUserInfo } from "../Login/UserInfo";
-const accessToken = localStorage.getItem("accessToken");
 export const baseUrl = "https://api.dowadream.site/user/";
 
 export const userRegion = async (props) =>{
-  const token = accessToken;
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkyNTA0ODk1LCJpYXQiOjE2OTIyNDU2OTUsImp0aSI6IjljYzY1MTE0ZTQwMzQ3NmU5ZjUwZTkzOTc3MjU4NWQ5IiwidXNlcl9pZCI6MTV9.nyAMpdAN_llQZwWuKExZhN3stnXcPR1CE5KA_BHAjUY"
   const regions = props;
 
     try {    
@@ -17,7 +15,6 @@ export const userRegion = async (props) =>{
         });
     
         console.log(response.data);
-        await getUserInfo();
       } catch (error) {
         console.log(error);
       }
@@ -25,7 +22,7 @@ export const userRegion = async (props) =>{
 
 export const userTag = async (props) =>{
 
-  const token = accessToken;
+  const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNjkyNTA0ODk1LCJpYXQiOjE2OTIyNDU2OTUsImp0aSI6IjljYzY1MTE0ZTQwMzQ3NmU5ZjUwZTkzOTc3MjU4NWQ5IiwidXNlcl9pZCI6MTV9.nyAMpdAN_llQZwWuKExZhN3stnXcPR1CE5KA_BHAjUY"
   const tags = props;
 
   try{
@@ -41,3 +38,4 @@ export const userTag = async (props) =>{
   }
 
 }
+
