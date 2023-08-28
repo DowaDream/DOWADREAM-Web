@@ -15,6 +15,7 @@ export const getAllReviewInfo = async () => {
 export const getReviewDetail = async (reviewNum) =>{
   try{
     const response = await axios.get(`${baseUrl}${reviewNum}/`);
+    console.log(response.data.data);
     return response.data.data;
   }catch(error){
     return error;
@@ -29,6 +30,8 @@ export const writeReview = async (props) =>{
     formData.append('title', title);
     formData.append('content', content);
     formData.append('is_public', "True");
+    // formData.append('images', [images]);
+
     // formData.append('images', images); // 파일 업로드를 위한 부분
     
     for (let value of formData.values()) {

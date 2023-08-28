@@ -8,8 +8,6 @@ import InfoTitle from '../components/Home/InfoTitle';
 import InfoItem from '../components/Home/InfoItem';
 import { Wrapper } from '../styles/Common';
 import { SearchArea, SearchAreaKeyword, SearchCheer, SearchDday } from '../apis/Review/ScrapCheerSave';
-import { gugunCdMaker, gugunNameMaker } from '../assets/Sidogugun';
-import { TagCodeMaker, TagNameMaker } from '../assets/TagCode';
 import { getVolDetail } from '../apis/VolInfo/VolInfo';
 function Main(){
 
@@ -33,20 +31,26 @@ function Main(){
   }
 
   const callInfo = async() =>{
+    
     let gugunCd = localStorage.getItem("user_regions");
     let TagCd = localStorage.getItem("user_tags");
+    
     const arr1 = [];
-    const arr2 = [];
+    let arr2 = [];
+    
     arr1.push(JSON.parse(gugunCd));
-    console.log(arr1[0]);
+    arr2.push(JSON.parse(TagCd));
 
-    let resopnse = await SearchAreaKeyword(null,arr1[0]);
+    console.log(arr1[0]);
+    arr2[0] = ["1100","1200"]
+
+    let resopnse = await SearchAreaKeyword(null ,arr1[0]);
     let resopnse2 = await SearchDday();
-    let resopnse3 = await SearchCheer();
+    // let resopnse3 = await SearchCheer();
 
     resopnse = resopnse.slice(0,4);
     resopnse2 = resopnse2.slice(0,4);
-    resopnse3 = resopnse3.slice(0,4);
+    // resopnse3 = resopnse3.slice(0,4);
 
     const real1 = []
     const real2 = []
@@ -68,15 +72,15 @@ function Main(){
   );
   await SetDday(real2);
 
-  await Promise.all(
+  // await Promise.all(
 
-    resopnse3.map(async (item)=>{
-      let fetchedInfo = item;
-      fetchedInfo.tag = TagCodeMaker(item.tag);
-      real3.push(fetchedInfo);
-    })
-  );
-  await SetCheer(real3);
+  //   resopnse3.map(async (item)=>{
+  //     let fetchedInfo = item;
+  //     fetchedInfo.tag = TagCodeMaker(item.tag);
+  //     real3.push(fetchedInfo);
+  //   })
+  // );
+  // await SetCheer(real3);
 
 
 
@@ -133,7 +137,7 @@ function Main(){
                       recruitStart={item.recruitStart}
                       recruitEnd={item.recruitEnd}
                       actStart={item.actStart}
-                      actEnd={item.actSEnd}
+                      actEnd={item.actEnd}
                       dday ={item.dday}
                       place={item.place}
                       // num_cheer={item.num_cheer}
@@ -169,7 +173,7 @@ function Main(){
                       recruitStart={item.recruitStart}
                       recruitEnd={item.recruitEnd}
                       actStart={item.actStart}
-                      actEnd={item.actSEnd}
+                      actEnd={item.actEnd}
                       dday ={item.dday}
                       place={item.place}
                       // num_cheer={item.num_cheer}

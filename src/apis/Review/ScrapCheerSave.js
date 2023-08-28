@@ -22,9 +22,9 @@ export const SearchAreaKeyword = async (tagCode, areaCode) => {
     const areaCodeQuery = areaCodeArray.map(code => `areaCode=${code}`).join('&');
     const tagCodeQuery = tagCodeArray.map(code => `tagCode=${code}`).join('&');
 
-    console.log(`${baseUrl}search/keyword/?${areaCodeQuery}${tagCodeQuery}`);
+    console.log(`${baseUrl}search/keyword/?${areaCodeQuery}&${tagCodeQuery}`);
 
-    const response = await axios.get(`${baseUrl}search/keyword/?${areaCodeQuery}${tagCodeQuery}`);
+    const response = await axios.get(`${baseUrl}search/keyword/?${areaCodeQuery}&${tagCodeQuery}`);
     console.log(response.data.data);
     return response.data.data;
     
@@ -39,6 +39,7 @@ export const SearchDday = async () =>{
   try{
     
     const resopnse = await axios.get(`${baseUrl}search/dday/`)
+    console.log(resopnse.data.data);
     return resopnse.data.data
 
   }catch(err){
@@ -51,6 +52,7 @@ export const SearchCheer = async () =>{
 
   try{
     const resopnse = await axios.get(`${baseUrl}recommend/cheer/`)
+    console.log(resopnse.data.data);
     return resopnse.data.data;
   }catch(err){
     return err;

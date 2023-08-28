@@ -19,27 +19,39 @@ function MyVolunteerMy(){
           console.log(detailVolunteer);
           myVolunteerArr.push(
             <InfoItem
-
+              
               onClick={() => {
                 // progrmRegistNo 값이 없다면 '/info/default'로, 값이 있다면 `/info/${detailVolunteer.progrmRegistNo}`로 이동
                 const targetPath = detailVolunteer.progrmRegistNo
                   ? `/info/${detailVolunteer.progrmRegistNo}`
                   : '/info/default';
               window.location.href = targetPath;
-            }}
+              }}
 
-              key={i} style={{ width:'25%'}}
-              rid={detailVolunteer.title}
+              key={i} 
+              style={{ width:'25%'}}
               tag={detailVolunteer.tag}
+
               updated_at={detailVolunteer.updated_at}
+
+              recruitEnd = {detailVolunteer.recruitEnd}
+              recruitStart = {detailVolunteer.recruitStart}
+
+              actStart = {detailVolunteer.actStart.slice(11,16)}
+              actEnd = {detailVolunteer.actEnd.slice(11,16)}
+
+              institute = {detailVolunteer.recruitInstitute}
               progrmRegistNo={detailVolunteer.progrmRegistNo}
+              
               title={detailVolunteer.title}
               content={detailVolunteer.content}
+              dday = {detailVolunteer.dday}
+              
               images={detailVolunteer.images}
-              is_public={detailVolunteer.is_public}
-              is_customized={detailVolunteer.is_customized}
+              
               num_cheer={detailVolunteer.num_cheer}
               num_comment={detailVolunteer.num_comment}
+              
               writer={detailVolunteer.writer}
               writer_profile_img={detailVolunteer.writer_profile_img}
               writer_username={detailVolunteer.writer_username}
@@ -84,12 +96,12 @@ function MyVolunteerMy(){
 
 
 const Iteminfo = styled.div`
-
-justify-content : flex-start;
+  display : flex;
   width: 100%;
-  flex : 1;
-  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   align-items: center;
-  gap: 2em;
+  gap: 32px;
 
 `

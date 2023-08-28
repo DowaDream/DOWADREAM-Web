@@ -9,6 +9,7 @@ import MyReview from '../../components/Mypage/MyReview/MyReview';
 import MyTags from '../../components/MyTags';
 import ReviewWriteModal from '../../components/Mypage/ReviewWriteModal';
 import { upDateVolInfo } from '../../apis/Program/ProgramInfo';
+import pic from '../../프로필.jpg';
 
 function MyPage() {
 
@@ -36,7 +37,11 @@ function MyPage() {
       closeModal();
     }
   };
-  
+
+  const name = sessionStorage.getItem("name") === null ? "홍길동" : sessionStorage.getItem("name");
+  const email = sessionStorage.getItem("email") === null ? "gildong1234@gmail.com" : sessionStorage.getItem("email");
+  const profile = sessionStorage.getItem("profile") === null ? pic : sessionStorage.getItem("profile");
+
 
   const handleCategoryClick = (category) => { 
 
@@ -63,10 +68,10 @@ function MyPage() {
   return (
     <Wrapper>
       <Profile>
-        <GoogleProfilePic size={142}></GoogleProfilePic>
+        <GoogleProfilePic size={142} url={profile}></GoogleProfilePic>
         <ProfilePrivate>
-          <ProfileName>성민</ProfileName>
-          <ProfileEmail>sungin633236@gmail.com</ProfileEmail>
+          <ProfileName>{name}님</ProfileName>
+          <ProfileEmail>{email}</ProfileEmail>
           <Container91>
             <ProfileMemo1>
               {isEditing ? (
@@ -149,7 +154,7 @@ flex-direction: row;
 align-items: flex-end;
 padding: 0px;
 
-width: 103px;
+width: auto;
 height: 55px;
 justify-content: center;
 
@@ -172,7 +177,7 @@ justify-content: center;
 align-items: center;
 padding: 4px 10px 8px 0px;
 
-width: 300px;
+width: auto;
 height: 41px;
 font-family: 'Pretendard Variable';
 font-style: normal;

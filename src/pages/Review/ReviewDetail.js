@@ -167,7 +167,7 @@ let Container2 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: flex-end;
+  align-items: flex-end;  
   padding: 8px 0px 0px;
   gap: 10px;
   height: 81px;

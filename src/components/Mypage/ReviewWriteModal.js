@@ -37,8 +37,12 @@ const ReviewWriteModal = () => {
                   progrmRegistNo={detailVolunteer.progrmRegistNo}
                   title={detailVolunteer.title}
                   institute={detailVolunteer.recruitInstitute}
-                  actStart={detailVolunteer.actStart.slice(0,10)}
-                  actEnd={detailVolunteer.actEnd.slice(0,10)}
+
+                  recruitEnd = {detailVolunteer.recruitEnd}
+                  recruitStart = {detailVolunteer.recruitStart}
+    
+                  actStart = {detailVolunteer.actStart.slice(11,16)}
+                  actEnd = {detailVolunteer.actEnd.slice(11,16)}
 
                   writer={detailVolunteer.writer}
                   images={detailVolunteer.images}

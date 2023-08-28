@@ -10,11 +10,18 @@ import Scrap2 from '../../assets/스크랩색변화.svg'
 const LikesandScrap = ({num_cheer=0,num_clipped=0}) => {
     const [likeClicked, setLikeClicked] = useState(false); // State to track like button click
     const [scrapClicked, setScrapClicked] = useState(false); // State to track like button click
+    const [numCheer,setNunCheer] = useState(num_cheer);
+    const [numClipped,setNumClipped] = useState(num_clipped);
+
     const handleLikeClick = () => {
         setLikeClicked(!likeClicked);
+        if(!likeClicked) setNumClipped(numClipped+1);
+        else setNumClipped(numClipped-1);
     };
     const handleScrapClick = () => {
         setScrapClicked(!scrapClicked);
+        if(!scrapClicked) setNunCheer(numClipped+1);
+        else setNunCheer(numClipped-1);
     };
   return (
     <>
